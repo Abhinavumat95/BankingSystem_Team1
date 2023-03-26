@@ -12,12 +12,12 @@ import com.learning.service.SuperAdminService;
 @RestController
 @RequestMapping("/api/admin")
 public class SuperAdminController {
-	
-	@Autowired
-	SuperAdminService superAdminService;
-	
-	@PostMapping("/adminsignup")
-	public SuperAdmin signUp(@RequestBody SuperAdmin superAdmin) {
-		return superAdminService.registerSuperAdmin(superAdmin);
-	}
+//	
+//	@Autowired
+//	SuperAdminService superAdminService;
+//	
+//	@PostMapping("/adminsignup")
+//	public SuperAdmin signUp(@RequestBody SuperAdmin superAdmin) {
+//		return superAdminService.registerSuperAdmin(superAdmin);
+//	}
 }
