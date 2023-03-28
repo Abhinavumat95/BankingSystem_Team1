@@ -39,6 +39,7 @@ public class StaffService {
 		
 		user.setId(username.hashCode());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setEnabled(true);
 		return userRepo.save(user);
 	}
 }

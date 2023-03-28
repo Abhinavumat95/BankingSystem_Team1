@@ -1,6 +1,7 @@
 package com.learning.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -13,27 +14,9 @@ import com.learning.repo.AuthorityRepository;
 import com.learning.repo.UserRepository;
 
 
-import org.springframework.web.bind.annotation.RequestBody;
-import com.learning.entity.SuperAdmin;
-import com.learning.repo.SuperAdminRepo;
-
 
 @Service
 public class SuperAdminService {
-	// Original Field
-//	@Autowired
-//	SuperAdminRepo superAdminRepo;
-	
-	
-	
-	
-	// Original Method
-//	public SuperAdmin registerSuperAdmin(@RequestBody SuperAdmin newSuperAdmin) {
-//		System.out.println("Admin Registered");
-//		return superAdminRepo.save(newSuperAdmin);
-//
-//	}
-	
 	
 	private UserRepository userRepository;
 	private AuthorityRepository authorityRepositoy;

@@ -20,14 +20,16 @@ public class CustomerInfo implements Serializable {
 	private String phone;
 	private String pan;
 	private String aadhar;
+	private String fullname;
 	
+
 	public CustomerInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public CustomerInfo(String username, String securityQuestion, String securityAnswer, String phone, String pan,
-			String aadhar) {
+			String aadhar, String fullname) {
 		super();
 		this.username = username;
 		this.securityQuestion = securityQuestion;
@@ -35,6 +37,7 @@ public class CustomerInfo implements Serializable {
 		this.phone = phone;
 		this.pan = pan;
 		this.aadhar = aadhar;
+		this.fullname = fullname;
 	}
 
 	public String getUsername() {
@@ -84,11 +87,20 @@ public class CustomerInfo implements Serializable {
 	public void setAadhar(String aadhar) {
 		this.aadhar = aadhar;
 	}
+	
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 
 	@Override
 	public String toString() {
 		return "CustomerInfo [username=" + username + ", securityQuestion=" + securityQuestion + ", securityAnswer="
-				+ securityAnswer + ", phone=" + phone + ", pan=" + pan + ", aadhar=" + aadhar + "]";
+				+ securityAnswer + ", phone=" + phone + ", pan=" + pan + ", aadhar=" + aadhar + ", fullname=" + fullname
+				+ "]";
 	}
 
 

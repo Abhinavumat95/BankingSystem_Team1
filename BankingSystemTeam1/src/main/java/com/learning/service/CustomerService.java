@@ -35,20 +35,22 @@ public class CustomerService {
 
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public User signUp(User user) {
-		String username = user.getUsername();
+		String username = user.getUsername();		String fullname = user.getFullname();
+		
 		if(userRepository.existsById(username)) {
 			throw new UserAlreadyExistException("Username: " + username + " already exists.");
 		}
 		
 		CustomerInfo info = new CustomerInfo();
 		info.setUsername(username);
+		info.setFullname(fullname);
 		customerInfoRepository.save(info);
 		
 		authorityRepositoy.save(new Authority(username, UserRole.CUSTOMER.name()));
 		
 		user.setId(username.hashCode());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		
+		user.setEnabled(true);
 		return userRepository.save(user);
 	}
 }
