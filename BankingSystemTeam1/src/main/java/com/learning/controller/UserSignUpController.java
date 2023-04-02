@@ -46,6 +46,8 @@ public class UserSignUpController {
 		return new ResponseEntity<String>(userInfo, HttpStatus.CREATED);
 	}
 	
+	// TODO
+	// this should belong to SuperAdminController
 	@PostMapping("/admin/staff")
 	public ResponseEntity<String> createStaff(@RequestBody User user) {
 		String userInfo = staffService.createStaff(user).toString();
