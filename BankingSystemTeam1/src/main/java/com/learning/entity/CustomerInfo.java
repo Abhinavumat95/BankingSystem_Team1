@@ -2,9 +2,26 @@ package com.learning.entity;
 
 import java.io.Serializable;
 
+
+
+
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 @Entity
 @Table (name="customerInfo")
@@ -12,33 +29,32 @@ public class CustomerInfo implements Serializable {
 	private static final long serialVersionUID = 2652327633296064143L;
 	
 	@Id
+	@Column(name = "username")
 	private String username;
-//	private String customerID;
 
+	@Column(name = "securityQuestion")
 	private String securityQuestion;
+	
+	@Column(name = "securityAnswer")
 	private String securityAnswer;
+	
+	@Column(name = "phone")
 	private String phone;
+	
+	@Column(name = "pan")
 	private String pan;
+	
+	@Column(name = "aadhar")
 	private String aadhar;
+	
+	@Column(name = "fullname")
 	private String fullname;
 	
-
-	public CustomerInfo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public CustomerInfo(String username, String securityQuestion, String securityAnswer, String phone, String pan,
-			String aadhar, String fullname) {
-		super();
-		this.username = username;
-		this.securityQuestion = securityQuestion;
-		this.securityAnswer = securityAnswer;
-		this.phone = phone;
-		this.pan = pan;
-		this.aadhar = aadhar;
-		this.fullname = fullname;
-	}
+	@JsonIgnore
+	@OneToMany(mappedBy="customerInfo", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@Column(name = "accountList")
+	private Set<Account> accountList;
+	
 
 	public String getUsername() {
 		return username;
@@ -87,7 +103,7 @@ public class CustomerInfo implements Serializable {
 	public void setAadhar(String aadhar) {
 		this.aadhar = aadhar;
 	}
-	
+
 	public String getFullname() {
 		return fullname;
 	}
@@ -96,12 +112,47 @@ public class CustomerInfo implements Serializable {
 		this.fullname = fullname;
 	}
 
+	public Set<Account> getAccountList() {
+		return accountList;
+	}
+
+	public void setAccountList(Long accountNo) {
+		this.accountList = accountList;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public CustomerInfo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CustomerInfo(String username, String securityQuestion, String securityAnswer, String phone, String pan,
+			String aadhar, String fullname, Set<Account> accountList) {
+		super();
+		this.username = username;
+		this.securityQuestion = securityQuestion;
+		this.securityAnswer = securityAnswer;
+		this.phone = phone;
+		this.pan = pan;
+		this.aadhar = aadhar;
+		this.fullname = fullname;
+		this.accountList = accountList;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "CustomerInfo [username=" + username + ", securityQuestion=" + securityQuestion + ", securityAnswer="
 				+ securityAnswer + ", phone=" + phone + ", pan=" + pan + ", aadhar=" + aadhar + ", fullname=" + fullname
-				+ "]";
+				+ ", accountList=" + accountList + "]";
 	}
+
+		
+	
 
 
 }

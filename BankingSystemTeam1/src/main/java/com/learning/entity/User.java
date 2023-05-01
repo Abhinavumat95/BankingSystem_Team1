@@ -1,25 +1,30 @@
 package com.learning.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
 public class User {
 	
     @Id
+    @Column(name = "username")
     private String username;
-
+    @Column(name = "password")
     private String password;
 
-//    @JsonIgnore
+    @Column(name = "enabled")
     private boolean enabled;
     
+    @Column(name = "fullname")
     private String fullname;
     
+    @Column(name = "id")
     private int id;
 
 	public User() {

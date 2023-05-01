@@ -1,6 +1,8 @@
 package com.learning.service;
 
 import java.util.Optional;
+import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -86,6 +88,16 @@ public class CustomerManagementService {
 			throw new UserNotExistException("Data Not there");
 
 		}
+	}
+	
+	public List<Object[]> getCustomer(@PathVariable("username") String username) {
+
+		List<Object[]> optional = userRepo.fetchCustomer(username);
+		if (optional.isEmpty()) {
+			throw new UserNotExistException("User does not exist");
+		}
+		return optional;
+
 	}
 	
 

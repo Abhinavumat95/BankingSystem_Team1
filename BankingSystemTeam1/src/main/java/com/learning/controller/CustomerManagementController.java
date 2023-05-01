@@ -1,5 +1,6 @@
 package com.learning.controller;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,11 @@ public class CustomerManagementController {
 			@RequestBody User newUser) {
 		return customerManagementService.customerEnableOrDisable(newUser);
 
+	}
+	
+	@GetMapping("/staff/customer/{username}")
+	public List<Object[]> getCustomerWithUsername(@PathVariable("username") String username) {
+		return customerManagementService.getCustomer(username);
 	}
 
 }
