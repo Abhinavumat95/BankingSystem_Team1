@@ -1,6 +1,7 @@
 package com.learning.service;
 
 import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -41,9 +42,12 @@ public class AccountManagementService {
 		if(!customerInfoRepo.existsById(username)) {
 			throw new UserNotExistException("Username: " + username + " does not exist.");
 		}
+	
 		
-		Random random = new Random();   
-		Long accountNo = 1000000 + random.nextLong(900000000000L);   
+		long leftLimit = 10000000L;
+		long rightLimit = 999999999999L;
+		long accountNo = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+
 		
 		if(accountRepository.existsById(accountNo)) {
 			throw new UserAlreadyExistException("Account number: " + accountNo + " already exist.");
