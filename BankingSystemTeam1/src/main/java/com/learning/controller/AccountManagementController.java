@@ -2,6 +2,8 @@ package com.learning.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.learning.entity.Account;
 import com.learning.entity.CustomerInfo;
 import com.learning.service.AccountManagementService;
+import com.learning.util.JwtVerify;
 
 @RestController
 @RequestMapping("/api")
@@ -32,19 +35,23 @@ public class AccountManagementController {
 
 	@PostMapping("customer/{username}/account")
 	public ResponseEntity<String> createCustomerAccount(@PathVariable("username") String username,
-			@RequestBody Account newAccount) {
+			@RequestBody Account newAccount, HttpServletRequest httpServletRequest) {
+		JwtVerify.jwtVerify(httpServletRequest, username);
 		String accountInfo = accountManagementService.createAccount(username, newAccount).toString();
 		return new ResponseEntity<String>(accountInfo, HttpStatus.CREATED);
 	}
 
 	@GetMapping("customer/{username}/account")
-	public List<Object[]> getCustomerAccounts(@PathVariable("username") String username) {
+	public List<Object[]> getCustomerAccounts(@PathVariable("username") String username,
+			HttpServletRequest httpServletRequest) {
+		JwtVerify.jwtVerify(httpServletRequest, username);
 		return accountManagementService.getCustomerInfoAccounts(username);
 	}
 	
 	@GetMapping("customer/{username}/account/{accountNumber}")
 	public Account getCustomerAccountDetails(@PathVariable("username") String username,
-			@PathVariable("accountNumber") Long accountNumber) {
+			@PathVariable("accountNumber") Long accountNumber, HttpServletRequest httpServletRequest) {
+		JwtVerify.jwtVerify(httpServletRequest, username);
 		return accountManagementService.getCustomerInfoAccountDetails(username, accountNumber);
 	}
 	

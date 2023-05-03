@@ -49,4 +49,9 @@ public class CustomExceptionHandler {
     public final ResponseEntity<String> handleAccountNotAuthorizedException(Exception ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
     }
+    
+    @ExceptionHandler(WrongURLException.class)
+    public final ResponseEntity<String> wrongURLException(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
