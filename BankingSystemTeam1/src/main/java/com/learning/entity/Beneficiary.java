@@ -1,10 +1,17 @@
 package com.learning.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "beneficiary")
@@ -13,133 +20,84 @@ public class Beneficiary {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private int beneficiaryID;
-	private int customerID;
-	private long accountNumber;
-	private String fullName;
-	private String status;
-	private String accountType;
-	private String date;
+	private boolean enabled;
+	LocalDate creationDate = LocalDate.now();
 	
+	private long accNum;
+	private AccountType type;
 	
-	
-	public Beneficiary() {
-		super();
-	}
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "username")
+	private CustomerInfo customerInfo;
 
-
-
-	public Beneficiary(int beneficiaryID, int customerID, long accountNumber, String fullName, String status,
-			String accountType, String date) {
+	public Beneficiary(int beneficiaryID, boolean enabled, LocalDate creationDate, long accNum, AccountType type,
+			CustomerInfo customerInfo) {
 		super();
 		this.beneficiaryID = beneficiaryID;
-		this.customerID = customerID;
-		this.accountNumber = accountNumber;
-		this.fullName = fullName;
-		this.status = status;
-		this.accountType = accountType;
-		this.date = date;
+		this.enabled = enabled;
+		this.creationDate = creationDate;
+		this.accNum = accNum;
+		this.type = type;
+		this.customerInfo = customerInfo;
 	}
 
-
-
+	public Beneficiary() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getBeneficiaryID() {
 		return beneficiaryID;
 	}
 
-
-
 	public void setBeneficiaryID(int beneficiaryID) {
 		this.beneficiaryID = beneficiaryID;
 	}
 
-
-
-	public int getCustomerID() {
-		return customerID;
+	public boolean isEnabled() {
+		return enabled;
 	}
 
-
-
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
-
-
-	public long getAccountNumber() {
-		return accountNumber;
+	public LocalDate getCreationDate() {
+		return creationDate;
 	}
 
-
-
-	public void setAccountNumber(long accountNumber) {
-		this.accountNumber = accountNumber;
+	public void setCreationDate(LocalDate creationDate) {
+		this.creationDate = creationDate;
 	}
 
-
-
-	public String getFullName() {
-		return fullName;
+	public long getAccNum() {
+		return accNum;
 	}
 
-
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setAccNum(long accNum) {
+		this.accNum = accNum;
 	}
 
-
-
-	public String getStatus() {
-		return status;
+	public AccountType getType() {
+		return type;
 	}
 
-
-
-	public void setStatus(String status) {
-		this.status = status;
+	public void setType(AccountType type) {
+		this.type = type;
 	}
 
-
-
-	public String getAccountType() {
-		return accountType;
+	public CustomerInfo getCustomerInfo() {
+		return customerInfo;
 	}
 
-
-
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
+	public void setCustomerInfo(CustomerInfo customerInfo) {
+		this.customerInfo = customerInfo;
 	}
-
-
-
-	public String getDate() {
-		return date;
-	}
-
-
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-
 
 	@Override
 	public String toString() {
-		return "Beneficiary [beneficiaryID=" + beneficiaryID + ", customerID=" + customerID + ", accountNumber="
-				+ accountNumber + ", fullName=" + fullName + ", status=" + status + ", accountType=" + accountType
-				+ ", date=" + date + "]";
+		return "Beneficiary [beneficiaryID=" + beneficiaryID + ", enabled=" + enabled + ", creationDate=" + creationDate
+				+ ", accNum=" + accNum + ", type=" + type + ", customerInfo=" + customerInfo + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

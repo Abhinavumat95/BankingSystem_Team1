@@ -24,4 +24,29 @@ public class CustomExceptionHandler {
     public final ResponseEntity<String> handleUserNotAuthorizedException(Exception ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
     }
+    
+    @ExceptionHandler(AccountNotExistException.class)
+    public final ResponseEntity<String> handleAccountNotExistException(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler(AccountAlreadyExistException.class) 
+    public final ResponseEntity<String> handleAccountAlreadyExistException(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+    
+    @ExceptionHandler(BeneficiaryAlreadyExistException.class) 
+    public final ResponseEntity<String> handleBeneficiaryAlreadyExistException(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+    
+    @ExceptionHandler(BeneficiaryNotExistException.class) 
+    public final ResponseEntity<String> handleBeneficiaryNotExistException(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler(AccountNotAuthorizedException.class) 
+    public final ResponseEntity<String> handleAccountNotAuthorizedException(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
 }

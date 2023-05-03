@@ -29,9 +29,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+//                .antMatchers(HttpMethod.POST, "/api/customer/register").permitAll()
+//                .antMatchers("/api/customer/*").hasAuthority("CUSTOMER")
+//                .antMatchers("/api/customer/{username}/account/{accountNumber}").hasAuthority("CUSTOMER")
+//                .antMatchers("/api/staff/*").hasAuthority("STAFF")
+//                .antMatchers(HttpMethod.POST, "/api/admin/register").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/authenticate/*").permitAll()
+//                .antMatchers("/api/admin/staff").hasAuthority("SUPER_ADMIN")
+//                .antMatchers(HttpMethod.GET, "/api/util/*").permitAll() // For testing purpose
+//                .anyRequest().authenticated()
                 .antMatchers(HttpMethod.POST, "/api/customer/register").permitAll()
-                .antMatchers("/api/customer/*").hasAuthority("CUSTOMER")
-                .antMatchers("/api/customer/{username}/account/{accountNumber}").hasAuthority("CUSTOMER")
+                .antMatchers("/api/customer/{username}/*").hasAuthority("CUSTOMER")
                 .antMatchers("/api/staff/*").hasAuthority("STAFF")
                 .antMatchers(HttpMethod.POST, "/api/admin/register").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/authenticate/*").permitAll()

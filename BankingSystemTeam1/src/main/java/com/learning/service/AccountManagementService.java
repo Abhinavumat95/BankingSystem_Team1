@@ -61,7 +61,7 @@ public class AccountManagementService {
 		newAccount.setCreationDate(LocalDate.now());
 		newAccount.setCustomerInfo(customer);
 
-		customer.setAccountList(newAccount.getAccountNumber());
+//		customer.setAccountList(newAccount.getAccountNumber());
 		System.out.println(customer.getAccountList());
 
 		return accountRepository.save(newAccount);

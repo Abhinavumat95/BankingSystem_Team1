@@ -1,11 +1,7 @@
 package com.learning.entity;
 
 import java.io.Serializable;
-
-
-
-
-
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -55,6 +51,29 @@ public class CustomerInfo implements Serializable {
 	@Column(name = "accountList")
 	private Set<Account> accountList;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="customerInfo", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@Column(name = "beneficiaryList")
+	private List<Beneficiary> beneficiaryList;
+
+	public CustomerInfo(String username, String securityQuestion, String securityAnswer, String phone, String pan,
+			String aadhar, String fullname, Set<Account> accountList, List<Beneficiary> beneficiaryList) {
+		super();
+		this.username = username;
+		this.securityQuestion = securityQuestion;
+		this.securityAnswer = securityAnswer;
+		this.phone = phone;
+		this.pan = pan;
+		this.aadhar = aadhar;
+		this.fullname = fullname;
+		this.accountList = accountList;
+		this.beneficiaryList = beneficiaryList;
+	}
+
+	public CustomerInfo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getUsername() {
 		return username;
@@ -116,43 +135,23 @@ public class CustomerInfo implements Serializable {
 		return accountList;
 	}
 
-	public void setAccountList(Long accountNo) {
+	public void setAccountList(Set<Account> accountList) {
 		this.accountList = accountList;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<Beneficiary> getBeneficiaryList() {
+		return beneficiaryList;
 	}
 
-	public CustomerInfo() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setBeneficiaryList(List<Beneficiary> beneficiaryList) {
+		this.beneficiaryList = beneficiaryList;
 	}
-
-	public CustomerInfo(String username, String securityQuestion, String securityAnswer, String phone, String pan,
-			String aadhar, String fullname, Set<Account> accountList) {
-		super();
-		this.username = username;
-		this.securityQuestion = securityQuestion;
-		this.securityAnswer = securityAnswer;
-		this.phone = phone;
-		this.pan = pan;
-		this.aadhar = aadhar;
-		this.fullname = fullname;
-		this.accountList = accountList;
-	}
-
-
 
 	@Override
 	public String toString() {
 		return "CustomerInfo [username=" + username + ", securityQuestion=" + securityQuestion + ", securityAnswer="
 				+ securityAnswer + ", phone=" + phone + ", pan=" + pan + ", aadhar=" + aadhar + ", fullname=" + fullname
-				+ ", accountList=" + accountList + "]";
+				+ ", accountList=" + accountList + ", beneficiaryList=" + beneficiaryList + "]";
 	}
-
-		
 	
-
-
 }
