@@ -51,7 +51,13 @@ public class CustomExceptionHandler {
     }
     
     @ExceptionHandler(WrongURLException.class)
-    public final ResponseEntity<String> wrongURLException(Exception ex, WebRequest request) {
+    public final ResponseEntity<String> handleWrongURLException(Exception ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+    
+    @ExceptionHandler(SenderLowBalanceException.class)
+    public final ResponseEntity<String> handleSenderLowBalanceException(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+    
 }

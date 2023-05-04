@@ -1,6 +1,6 @@
 package com.learning.entity;
 import java.time.LocalDate;
-
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,6 +41,40 @@ public class Account {
 	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "username")
 	private CustomerInfo customerInfo;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="account", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Transaction> transactionList;
+
+	public Account() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public List<Transaction> getTransactionList() {
+		return transactionList;
+	}
+
+
+	public void setTransactionList(List<Transaction> transactionList) {
+		this.transactionList = transactionList;
+	}
+
+
+	public Account(long accountNumber, AccountType accountType, boolean enabled, float balance, LocalDate creationDate,
+			CustomerInfo customerInfo, List<Transaction> transactionList) {
+		super();
+		this.accountNumber = accountNumber;
+		this.accountType = accountType;
+		this.enabled = enabled;
+		this.balance = balance;
+		this.creationDate = creationDate;
+		this.customerInfo = customerInfo;
+		this.transactionList = transactionList;
+	}
+
+
 
 	public long getAccountNumber() {
 		return accountNumber;
@@ -88,32 +123,5 @@ public class Account {
 	public void setCustomerInfo(CustomerInfo customerInfo) {
 		this.customerInfo = customerInfo;
 	}
-
-	public Account() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Account(long accountNumber, AccountType accountType, boolean enabled, float balance, LocalDate creationDate,
-			CustomerInfo customerInfo) {
-		super();
-		this.accountNumber = accountNumber;
-		this.accountType = accountType;
-		this.enabled = enabled;
-		this.balance = balance;
-		this.creationDate = creationDate;
-		this.customerInfo = customerInfo;
-	}
-
-//	@Override
-//	public String toString() {
-//		return "Account [accountNumber=" + accountNumber + ", accountType=" + accountType + ", enabled=" + enabled
-//				+ ", balance=" + balance + ", creationDate=" + creationDate + ", customerInfo=" + customerInfo + "]";
-//	}
-
-	
-
-	
-	
 	
 }

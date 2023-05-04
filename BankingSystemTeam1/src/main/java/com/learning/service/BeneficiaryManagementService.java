@@ -133,6 +133,7 @@ public class BeneficiaryManagementService {
 	
 	// Assuming all the accounts are stored in this table
 	private boolean ifAccExist(long accNum) {
+		// 
 		return accountRepository.findById(accNum).isPresent();
 	}
 	
