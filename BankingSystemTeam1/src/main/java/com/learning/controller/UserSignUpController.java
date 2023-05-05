@@ -1,8 +1,10 @@
 package com.learning.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +15,7 @@ import com.learning.service.CustomerService;
 import com.learning.service.StaffService;
 import com.learning.service.SuperAdminService;
 
-
-
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class UserSignUpController {
@@ -32,7 +32,6 @@ public class UserSignUpController {
 		this.customerService = customerService;
 		this.staffService = staffService;
 	}
-
 
 	@PostMapping("/admin/register")
 	public ResponseEntity<String> adminSignUp(@RequestBody User user) {
