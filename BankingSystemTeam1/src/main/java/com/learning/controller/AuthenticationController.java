@@ -1,5 +1,6 @@
 package com.learning.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,7 @@ import com.learning.entity.UserRole;
 import com.learning.service.AuthenticationService;
 
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/authenticate")
 public class AuthenticationController {
