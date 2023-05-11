@@ -26,19 +26,22 @@ public class Beneficiary {
 	private long accNum;
 	private AccountType type;
 	
+	private String beneficiaryName;
+	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "username")
 	private CustomerInfo customerInfo;
 
 	public Beneficiary(int beneficiaryID, boolean enabled, LocalDate creationDate, long accNum, AccountType type,
-			CustomerInfo customerInfo) {
+			String beneficiaryName, CustomerInfo customerInfo) {
 		super();
 		this.beneficiaryID = beneficiaryID;
 		this.enabled = enabled;
 		this.creationDate = creationDate;
 		this.accNum = accNum;
 		this.type = type;
+		this.beneficiaryName = beneficiaryName;
 		this.customerInfo = customerInfo;
 	}
 
@@ -87,6 +90,14 @@ public class Beneficiary {
 		this.type = type;
 	}
 
+	public String getBeneficiaryName() {
+		return beneficiaryName;
+	}
+
+	public void setBeneficiaryName(String beneficiaryName) {
+		this.beneficiaryName = beneficiaryName;
+	}
+
 	public CustomerInfo getCustomerInfo() {
 		return customerInfo;
 	}
@@ -98,6 +109,8 @@ public class Beneficiary {
 	@Override
 	public String toString() {
 		return "Beneficiary [beneficiaryID=" + beneficiaryID + ", enabled=" + enabled + ", creationDate=" + creationDate
-				+ ", accNum=" + accNum + ", type=" + type + ", customerInfo=" + customerInfo + "]";
+				+ ", accNum=" + accNum + ", type=" + type + ", beneficiaryName=" + beneficiaryName + ", customerInfo="
+				+ customerInfo + "]";
 	}
+	
 }

@@ -147,11 +147,11 @@ public class CustomerInfo implements Serializable {
 		this.beneficiaryList = beneficiaryList;
 	}
 
-	@Override
-	public String toString() {
-		return "CustomerInfo [username=" + username + ", securityQuestion=" + securityQuestion + ", securityAnswer="
-				+ securityAnswer + ", phone=" + phone + ", pan=" + pan + ", aadhar=" + aadhar + ", fullname=" + fullname
-				+ ", accountList=" + accountList + ", beneficiaryList=" + beneficiaryList + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "CustomerInfo [username=" + username + ", securityQuestion=" + securityQuestion + ", securityAnswer="
+//				+ securityAnswer + ", phone=" + phone + ", pan=" + pan + ", aadhar=" + aadhar + ", fullname=" + fullname
+//				+ ", accountList=" + accountList + ", beneficiaryList=" + beneficiaryList + "]";
+//	}
 	
 }

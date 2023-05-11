@@ -76,6 +76,7 @@ public class BeneficiaryManagementService {
 		
 		CustomerInfo customerInfo = customerOptional.get();
 		beneficiary.setCustomerInfo(customerInfo);
+		beneficiary.setBeneficiaryName(username);
 		List<Beneficiary> list = customerInfo.getBeneficiaryList();
 		if(list == null) {
 			list = new ArrayList<>();

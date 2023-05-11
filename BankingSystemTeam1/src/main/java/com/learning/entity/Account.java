@@ -123,5 +123,6 @@ public class Account {
 	public void setCustomerInfo(CustomerInfo customerInfo) {
 		this.customerInfo = customerInfo;
 	}
+
 	
 }

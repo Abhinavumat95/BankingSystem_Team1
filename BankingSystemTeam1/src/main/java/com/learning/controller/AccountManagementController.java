@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learning.entity.Account;
@@ -21,6 +23,7 @@ import com.learning.entity.CustomerInfo;
 import com.learning.service.AccountManagementService;
 import com.learning.util.JwtVerify;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class AccountManagementController {
@@ -34,11 +37,12 @@ public class AccountManagementController {
 	}
 
 	@PostMapping("customer/{username}/account")
-	public ResponseEntity<String> createCustomerAccount(@PathVariable("username") String username,
+//	public @ResponseBody ResponseEntity<String> createCustomerAccount(@PathVariable("username") String username,
+	public @ResponseBody Account createCustomerAccount(@PathVariable("username") String username,
 			@RequestBody Account newAccount, HttpServletRequest httpServletRequest) {
 		JwtVerify.jwtVerify(httpServletRequest, username);
-		String accountInfo = accountManagementService.createAccount(username, newAccount).toString();
-		return new ResponseEntity<String>(accountInfo, HttpStatus.CREATED);
+		return accountManagementService.createAccount(username, newAccount);
+//		return new ResponseEntity<String>("Account ("+accnum+") created", HttpStatus.CREATED);
 	}
 
 	@GetMapping("customer/{username}/account")
@@ -71,5 +75,7 @@ public class AccountManagementController {
 	public void approveListOfAccounts(@RequestBody CustomerInfo newCustomerInfo) {
 		accountManagementService.approveCustomerAccounts(newCustomerInfo);
 	}
+	
+	
 	
 }
