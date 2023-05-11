@@ -59,7 +59,7 @@ public class AccountManagementController {
 		return accountManagementService.getCustomerInfoAccountDetails(username, accountNumber);
 	}
 	
-	@GetMapping("staff/account/approve")
+	@GetMapping("staff/accounts/approve")
 	public List<Object[]> getAccountsToBeApproved() {
 		return accountManagementService.listOfAccountsToBeApproved();
 	}
@@ -70,12 +70,12 @@ public class AccountManagementController {
 		return accountManagementService.enableAccount(username, accountNumber);
 		
 	}
-	
-	@PutMapping("staff/account/approve")
+
+	@PutMapping("staff/accounts/approve")
 	public void approveListOfAccounts(@RequestBody CustomerInfo newCustomerInfo) {
 		accountManagementService.approveCustomerAccounts(newCustomerInfo);
 	}
-	
-	
-	
+
+
+
 }
