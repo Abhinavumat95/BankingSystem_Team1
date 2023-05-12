@@ -34,6 +34,12 @@ public class StaffManagementController {
 
 		return staffManagementService.getStaffUsers();
 	}
+	
+	@GetMapping("/staff/customer")
+	public List<User> getCustomer( ) {
+
+		return staffManagementService.getCustomerUsers();
+	}
 
 	@PutMapping("admin/staff")
 	public ResponseEntity<User> enableOrDisableStaff(@RequestBody User user) {

@@ -45,6 +45,15 @@ public class StaffManagementService {
 
 		return staffUsers;
 	}
+	
+	// get all Customer users
+		public List<User> getCustomerUsers(){
+
+			List<Authority> customersInAuth = listAuthorityCustomers();
+			List<User> customerUsers = getStaffUserList(customersInAuth);
+
+			return customerUsers;
+		}
 
 
 	// get list of authority as STAFF
@@ -65,6 +74,25 @@ public class StaffManagementService {
 
 		return staffsInAuth;
 	}
+	
+	// get list of authority as Customer
+		public List<Authority> listAuthorityCustomers(){
+
+			// get all authorities from DB
+			List<Authority> allAuthorities = userUtilityService.getAuthorities();
+
+			// put STAFF in a list
+			List<Authority> staffsInAuth = new ArrayList<>();
+			for (Authority user: allAuthorities) {
+
+				// get authority is STAFF
+				if (user.getAuthority().equals("CUSTOMER")) {
+					staffsInAuth.add(user);
+				}
+			}
+
+			return staffsInAuth;
+		}
 
 	// get only staff users
 	public List<User> getStaffUserList(List<Authority> staffs){
