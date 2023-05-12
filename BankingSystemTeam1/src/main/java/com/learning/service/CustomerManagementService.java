@@ -20,29 +20,29 @@ import com.learning.repo.UserRepository;
 
 @Service
 public class CustomerManagementService {
-	
+
 	UserRepository userRepo;
 	CustomerInfoRepository customerInfoRepo;
-	
+
 	@Autowired
-	public CustomerManagementService(UserRepository userRepo, 
-			CustomerInfoRepository customerInfoRepo) {
+	public CustomerManagementService(UserRepository userRepo,
+									 CustomerInfoRepository customerInfoRepo) {
 		super();
 		this.userRepo = userRepo;
 		this.customerInfoRepo = customerInfoRepo;
 	}
-	
+
 	//Updating the CustomerInfo table
-	public ResponseEntity<CustomerInfo> updateCustomerInfo(@PathVariable("username") String username, 
-			@RequestBody CustomerInfo newCustomerInfo) {
-		Optional<CustomerInfo> existingCust = customerInfoRepo.findById(username); 
+	public ResponseEntity<CustomerInfo> updateCustomerInfo(@PathVariable("username") String username,
+														   @RequestBody CustomerInfo newCustomerInfo) {
+		Optional<CustomerInfo> existingCust = customerInfoRepo.findById(username);
 		Optional<User> existingUser = userRepo.findById(username);
 
-		if (existingCust.isPresent() && existingUser.isPresent()) { 
+		if (existingCust.isPresent() && existingUser.isPresent()) {
 
 			CustomerInfo tempCust = existingCust.get();
 			User tempUser = existingUser.get();
-			
+
 			tempCust.setPhone(newCustomerInfo.getPhone());
 			tempCust.setPan(newCustomerInfo.getPan());
 			tempCust.setAadhar(newCustomerInfo.getAadhar());
@@ -50,7 +50,7 @@ public class CustomerManagementService {
 			tempCust.setSecurityAnswer(newCustomerInfo.getSecurityAnswer());
 			tempCust.setFullname(newCustomerInfo.getFullname());
 			tempUser.setFullname(newCustomerInfo.getFullname());
-			
+
 			userRepo.save(tempUser);
 
 			return new ResponseEntity<>(customerInfoRepo.save(tempCust), HttpStatus.OK);
@@ -60,7 +60,7 @@ public class CustomerManagementService {
 
 		}
 	}
-	
+
 	//Fetching the CustomerInfo Table
 	public CustomerInfo getCustomerInfo(@PathVariable("username") String username) {
 
@@ -71,18 +71,18 @@ public class CustomerManagementService {
 		return optional.get();
 
 	}
-	
-	//Customer enabled or disabled by staff
-	public ResponseEntity<User> customerEnableOrDisable( 
-			@RequestBody User newUser) {
-		Optional<User> existingCust = userRepo.findById(newUser.getUsername()); 
 
-		if (existingCust.isPresent()) { 
+	//Customer enabled or disabled by staff
+	public ResponseEntity<User> customerEnableOrDisable(
+			@RequestBody User newUser) {
+		Optional<User> existingCust = userRepo.findById(newUser.getUsername());
+
+		if (existingCust.isPresent()) {
 
 			User tempCust = existingCust.get();
-			
+
 			tempCust.setEnabled(newUser.isEnabled());
-			
+
 			return new ResponseEntity<>(userRepo.save(tempCust), HttpStatus.OK);
 
 		} else {
@@ -90,20 +90,16 @@ public class CustomerManagementService {
 
 		}
 	}
-	
-	public List<Object[]> getCustomer(@PathVariable("username") String username) {
 
-		List<Object[]> optional = userRepo.fetchCustomer(username);
+
+	public User getCustomer(@PathVariable("username") String username) {
+
+		Optional <User> optional = userRepo.findById(username);
 		if (optional.isEmpty()) {
 			throw new UserNotExistException("User does not exist");
 		}
-		return optional;
+		return optional.get();
 
 	}
-	
-
-	
-
-	
 
 }

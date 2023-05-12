@@ -23,36 +23,36 @@ import com.learning.util.JwtVerify;
 @RestController
 @RequestMapping("/api")
 public class CustomerManagementController {
-	
+
 	@Autowired
 	CustomerManagementService customerManagementService;
 
 	@PutMapping("/customer/{username}")
 	public ResponseEntity<CustomerInfo> updateCustomer(@PathVariable("username") String username,
-			@RequestBody CustomerInfo newCustomerInfo, HttpServletRequest httpServletRequest) {
-		
+													   @RequestBody CustomerInfo newCustomerInfo, HttpServletRequest httpServletRequest) {
+
 		JwtVerify.jwtVerify(httpServletRequest, username);
 		return customerManagementService.updateCustomerInfo(username, newCustomerInfo);
 
 	}
-	
+
 	@GetMapping("/customer/{username}")
-	public CustomerInfo getCustomer(@PathVariable("username") String username, 
-			HttpServletRequest httpServletRequest) {
-		
+	public CustomerInfo getCustomer(@PathVariable("username") String username,
+									HttpServletRequest httpServletRequest) {
+
 		JwtVerify.jwtVerify(httpServletRequest, username);
 		return customerManagementService.getCustomerInfo(username);
 	}
-	
+
 	@PutMapping("/staff/customer")
 	public ResponseEntity<User> enableOrDisableCustomer(
 			@RequestBody User newUser) {
 		return customerManagementService.customerEnableOrDisable(newUser);
 
 	}
-	
+
 	@GetMapping("/staff/customer/{username}")
-	public List<Object[]> getCustomerWithUsername(@PathVariable("username") String username) {
+	public User getCustomerWithUsername(@PathVariable("username") String username) {
 		return customerManagementService.getCustomer(username);
 	}
 
